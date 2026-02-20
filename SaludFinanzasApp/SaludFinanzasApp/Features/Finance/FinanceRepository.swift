@@ -71,7 +71,7 @@ final class FinanceRepository {
         }
     }
     
-    func fecthCategories(kind: String) throws -> [FinanceCategory] {
+    func fetchCategories(kind: String) throws -> [FinanceCategory] {
         try dbQueue.read {
             db in try FinanceCategory
                 .filter(sql: "kind  = ?", arguments: [kind])
@@ -102,5 +102,55 @@ final class FinanceRepository {
         )
         
         try dbQueue.write { db in try tx.insert(db)}
+    }
+    
+    func addAccount(name: String, type: String) throws {
+        let iso = ISO8601DateFormatter().string(from: Date())
+        let a = FinanceAccount(id: UUID().uuidString, name: name, type: type, createdAt: iso)
+        try dbQueue.write { db in try a.insert(db) }
+    }
+    
+    func deleteAccount(id: String) throws {
+        try dbQueue.write { db in
+            _ = try FinanceAccount.deleteOne(db, key: id)
+        }
+    }
+    
+    func addCategory(name: String, kind: String) throws {
+        let iso = ISO8601DateFormatter().string(from: Date())
+        let c = FinanceCategory(id: UUID().uuidString, name: name, kind: kind, createdAt: iso)
+        try dbQueue.write { db in try c.insert(db) }
+    }
+    
+    func deleteCategory(id: String) throws {
+        try dbQueue.write { db in
+            _ = try FinanceCategory.deleteOne(db, key: id)
+        }
+    }
+    
+    func monthlyTotals(forMonthContaining date: Date) throws -> (income: Double, expense: Double) {
+        let cal = Calendar.current
+        let start = cal.date(from: cal.dateComponents([.year, .month], from: date))!
+        let end = cal.date(byAdding: .month, value: 1, to: start)!
+        
+        let iso = ISO8601DateFormatter()
+        let startS = iso.string(from: start)
+        let endS = iso.string(from: end)
+        
+        return try dbQueue.read {
+            db in let income: Double = try Double.fetchOne(db, sql: """
+                SELECT COALESCE(SUM(amount), 0)
+                FROM finance_transaction
+                WHERE direction = 'income' AND occurred_at >= ? AND occurred_at < ?
+                """, arguments: [startS, endS]) ?? 0
+            
+            let expense: Double = try Double.fetchOne(db, sql: """
+                SELECT COALESCE(SUM(amount), 0) 
+                FROM finance_transaction 
+                WHERE direction = 'expense' AND occurred_at >= ? AND occurred_at < ?
+                """, arguments: [startS, endS]) ?? 0
+            
+            return (income, expense)
+        }
     }
 }

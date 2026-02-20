@@ -96,7 +96,7 @@ struct AddTransactionView: View {
     
     private func loadCategories() {
         do {
-            categories = try repo.fecthCategories(kind: direction)
+            categories = try repo.fetchCategories(kind: direction)
         } catch {
             errorMessage = "\(error)"
         }

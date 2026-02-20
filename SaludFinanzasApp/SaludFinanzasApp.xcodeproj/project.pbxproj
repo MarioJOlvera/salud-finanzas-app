@@ -10,12 +10,14 @@
 		0909770E2F44EF270063D59F /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909770B2F44EF270063D59F /* AppDatabase.swift */; };
 		09AD0A772F450CC3001B496E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 09AD0A762F450CC3001B496E /* GRDB */; };
 		09AD0A862F451370001B496E /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AD0A852F45136B001B496E /* AppEnvironment.swift */; };
+		09AD0A982F47A621001B496E /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AD0A972F47A61E001B496E /* DateFormatters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0909770B2F44EF270063D59F /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
 		097FFD4A2F44E8D500FA6734 /* SaludFinanzasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaludFinanzasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09AD0A852F45136B001B496E /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		09AD0A972F47A61E001B496E /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -49,6 +51,7 @@
 		0909770D2F44EF270063D59F /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				09AD0A972F47A61E001B496E /* DateFormatters.swift */,
 				09AD0A852F45136B001B496E /* AppEnvironment.swift */,
 				0909770C2F44EF270063D59F /* Database */,
 			);
@@ -152,6 +155,7 @@
 			files = (
 				09AD0A862F451370001B496E /* AppEnvironment.swift in Sources */,
 				0909770E2F44EF270063D59F /* AppDatabase.swift in Sources */,
+				09AD0A982F47A621001B496E /* DateFormatters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
