@@ -57,10 +57,16 @@ final class FinanceRepository {
         }
     }
     
-    func fetchTransactions() throws -> [FinanceTransaction] {
-        try dbQueue.read {
+    func fetchTransactions(forMonthContaining date: Date) throws -> [FinanceTransaction] {
+        let calendar = Calendar.current
+        
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
+        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+        
+        return try dbQueue.read {
             db in try FinanceTransaction
-                .order(sql: "occurred_at DESC")
+                .filter(sql: "occurred_at >= ? AND occurred_at <= ?", arguments: [startOfMonth, endOfMonth])
+                .order(Column("occurred_at").desc)
                 .fetchAll(db)
         }
     }
@@ -151,6 +157,39 @@ final class FinanceRepository {
                 """, arguments: [startS, endS]) ?? 0
             
             return (income, expense)
+        }
+    }
+    
+    func fetchAccountBalances() throws -> [AccountBalanceSummary] {
+        try dbQueue.read {
+            db in let rows = try Row.fetchAll(db, sql:
+            """
+            SELECT 
+                fa.id, 
+                fa.name, 
+                fa.type, 
+                COALESCE(SUM(
+                    CASE 
+                        WHEN ft.direction = 'income' THEN ft.amount
+                        WHEN ft.direction = 'expense' THEN -ft.amount 
+                        ELSE 0
+                    END 
+                ), 0) AS balance 
+            FROM finance_account fa 
+            LEFT JOIN finance_transaction ft ON ft.account_id = fa.id 
+            GROUP BY fa.id, fa.name, fa.type
+            ORDER BY fa.name ASC
+            """
+            )
+            
+            return rows.map {
+                row in AccountBalanceSummary(
+                    id: row["id"],
+                    name: row["name"],
+                    type: row["type"],
+                    balance: row["balance"]
+                )
+            }
         }
     }
 }

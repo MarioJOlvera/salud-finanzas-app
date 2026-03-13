@@ -5,6 +5,7 @@
 //  Created by Mario Alberto Juarez Olvera on 17/02/26.
 //
 
+
 import SwiftUI
 
 struct FinanceHomeView: View {
@@ -14,71 +15,138 @@ struct FinanceHomeView: View {
     @State private var showAdd = false
     @State private var errorMessage: String?
     @State private var monthlyIncome: Double = 0
-    @State private var monthlyExpense: Double = 0
+    @State private var monthlyExpenses: Double = 0
+    @State private var accountBalances: [AccountBalanceSummary] = []
+    @State private var selectedMonth: Date = Date()
     
     private var repo: FinanceRepository {
         FinanceRepository(dbQueue: env.db.dbQueue)
     }
     
+    private var monthlyBalance: Double {
+        monthlyIncome - monthlyExpenses
+    }
+    
     var body: some View {
-        NavigationView {
+        NavigationView{
             List {
                 Section {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Resumen del mes").font(.headline)
+                        Text("Resumen - \(selectedMonth.formattedMonthYear())")
+                            .font(.headline)
                         
-                        HStack {
-                            VStack(alignment: .leading) {
+                        HStack(alignment: .top) {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("Ingresos")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
+                                
                                 Text(monthlyIncome.currencyMXN())
-                                    .foregroundStyle(Color.green)
+                                    .font(.headline)
+                                    .foregroundStyle(.green)
                             }
+                            
                             Spacer()
                             
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("Gastos")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(monthlyExpense.currencyMXN())
-                                    .foregroundStyle(Color.secondary)
                                 
-                                let balance = monthlyIncome - monthlyExpense
-                                
-                                Text(balance.currencyMXN())
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(balance >= 0 ? .blue : .red)
-                            }
-                        }
-                    }
-                }
-                .padding(.vertical, 8)
-                
-                if let errorMessage {
-                    Text("Error: \(errorMessage)").foregroundStyle(Color.red)
-                }
-                if transactions.isEmpty {
-                    Text("Sin movimientos").foregroundStyle(Color.secondary)
-                } else {
-                    ForEach(transactions) {
-                        tx in HStack(alignment: .top) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(tx.direction == "expense" ? "Gasto" : "Ingreso").font(.headline)
-                                Text(tx.note?.isEmpty == false ? tx.note! : "-").foregroundStyle(Color.secondary)
-                                Text(tx.occurredAt.formattedShortDate()).foregroundStyle(Color.secondary)
+                                Text(monthlyExpenses.currencyMXN())
+                                    .font(.headline)
+                                    .foregroundStyle(.red)
                             }
                             
                             Spacer()
                             
-                            let sign = (tx.direction == "expense") ? "-" : "+"
-                            Text("\(sign)\(String(format: "%.2f", tx.amount)) \(tx.currency)").font(.headline)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Balance")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                
+                                Text(monthlyBalance.currencyMXN())
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(monthlyBalance >= 0 ? .blue : .red)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+                
+                if !accountBalances.isEmpty {
+                    Section("Balance por cuenta") {
+                        ForEach(accountBalances) {
+                            account in
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(account.name)
+                                        .font(.headline)
+                                    
+                                    Text(account.type.capitalized)
+                                        .font(.caption)
+                                        .foregroundStyle(account.balance >= 0 ? .blue : .red)
+                                }
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+                
+                if let errorMessage {
+                    Text("Error: \(errorMessage)")
+                        .foregroundStyle(.red)
+                }
+                
+                if transactions.isEmpty {
+                    Text("Sin movimientos todavía")
+                        .foregroundStyle(.secondary)
+                } else {
+                    Section("Movimientos") {
+                        ForEach(transactions) {
+                            tx in HStack(alignment: .top, spacing: 12) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(tx.direction == "expense" ? "Gasto" : "Ingreso")
+                                        .font(.headline)
+                                    
+                                    Text(tx.note?.isEmpty == false ? tx.note! : "Sin nota")
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                    
+                                    Text(tx.occurredAt.formattedShortDate())
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                let signedAmount = tx.direction == "expense" ? -tx.amount : tx.amount
+                                
+                                Text(signedAmount.currencyMXN())
+                                    .font(.headline)
+                                    .foregroundStyle(tx.direction == "expense" ? .red : .green)
+                                    .multilineTextAlignment(.trailing)
+                            }
+                            
+                            .padding(.vertical, 4)
                         }
                     }
                 }
             }
+            
             .listStyle(.insetGrouped)
             .navigationTitle("Finanzas")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    DatePicker(
+                        "",
+                        selection: $selectedMonth,
+                        displayedComponents: .date
+                    )
+                    .labelsHidden()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -87,6 +155,7 @@ struct FinanceHomeView: View {
                         Image(systemName: "plus")
                     }
                 }
+                
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink(destination: FinanceSettingsView()) {
                         Image(systemName: "gearshape")
@@ -101,23 +170,38 @@ struct FinanceHomeView: View {
             .onAppear {
                 load()
             }
+            .onChange(of: selectedMonth) {
+                load()
+            }
         }
     }
     
     private func load() {
         do {
-            transactions = try repo.fetchTransactions()
+            transactions = try repo.fetchTransactions(forMonthContaining: selectedMonth)
             loadSummary()
+            loadAccountBalances()
             errorMessage = nil
-        } catch { errorMessage = "\(error)" }
+        } catch {
+            errorMessage = "\(error)"
+        }
     }
     
     private func loadSummary() {
         do {
-            let totals = try repo.monthlyTotals(forMonthContaining: Date())
+            let totals = try repo.monthlyTotals(forMonthContaining: selectedMonth)
             monthlyIncome = totals.income
-            monthlyExpense = totals.expense
-        } catch { errorMessage = "\(error)" }
+            monthlyExpenses = totals.expense
+        } catch {
+            errorMessage = "\(error)"
+        }
+    }
+    
+    private func loadAccountBalances() {
+        do {
+            accountBalances = try repo.fetchAccountBalances()
+        } catch {
+            errorMessage = "\(error)"
+        }
     }
 }
-
