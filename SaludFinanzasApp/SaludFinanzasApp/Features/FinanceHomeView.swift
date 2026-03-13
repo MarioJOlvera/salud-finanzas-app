@@ -31,6 +31,30 @@ struct FinanceHomeView: View {
         NavigationView{
             List {
                 Section {
+                    HStack {
+                        Button {
+                            if let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: selectedMonth) {
+                                selectedMonth = previousMonth
+                            }
+                        } label: {
+                            Image(systemName: "chevron.left")
+                        }
+                        
+                        Spacer()
+                        
+                        Text(selectedMonth.formattedMonthYear())
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        Button {
+                            if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: selectedMonth) {
+                                selectedMonth = nextMonth
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right")
+                        }
+                    }
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Resumen - \(selectedMonth.formattedMonthYear())")
                             .font(.headline)

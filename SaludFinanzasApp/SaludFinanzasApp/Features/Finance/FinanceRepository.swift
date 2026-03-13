@@ -58,15 +58,13 @@ final class FinanceRepository {
     }
     
     func fetchTransactions(forMonthContaining date: Date) throws -> [FinanceTransaction] {
-        let calendar = Calendar.current
-        
-        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
-        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+        let start = date.startOfMonthUTC().toISO8601UTCString()
+        let end = date.startOfNextMonthUTC().toISO8601UTCString()
         
         return try dbQueue.read {
             db in try FinanceTransaction
-                .filter(sql: "occurred_at >= ? AND occurred_at <= ?", arguments: [startOfMonth, endOfMonth])
-                .order(Column("occurred_at").desc)
+                .filter(sql: "occurred_at >= ? AND occurred_at < ?", arguments: [start, end])
+                .order(sql: "occurred_at DESC")
                 .fetchAll(db)
         }
     }
@@ -92,6 +90,8 @@ final class FinanceRepository {
         categoryId: String?,
         note: String?
     ) throws {
+        let now = Date().toISO8601UTCString()
+        
         let tx = FinanceTransaction(
             id: UUID().uuidString,
             occurredAt: nowISO(),
@@ -107,7 +107,9 @@ final class FinanceRepository {
             createdAt: nowISO()
         )
         
-        try dbQueue.write { db in try tx.insert(db)}
+        try dbQueue.write {
+            db in try tx.insert(db)
+        }
     }
     
     func addAccount(name: String, type: String) throws {
@@ -135,26 +137,21 @@ final class FinanceRepository {
     }
     
     func monthlyTotals(forMonthContaining date: Date) throws -> (income: Double, expense: Double) {
-        let cal = Calendar.current
-        let start = cal.date(from: cal.dateComponents([.year, .month], from: date))!
-        let end = cal.date(byAdding: .month, value: 1, to: start)!
-        
-        let iso = ISO8601DateFormatter()
-        let startS = iso.string(from: start)
-        let endS = iso.string(from: end)
+        let start = date.startOfMonthUTC().toISO8601UTCString()
+        let end = date.startOfNextMonthUTC().toISO8601UTCString()
         
         return try dbQueue.read {
             db in let income: Double = try Double.fetchOne(db, sql: """
                 SELECT COALESCE(SUM(amount), 0)
                 FROM finance_transaction
                 WHERE direction = 'income' AND occurred_at >= ? AND occurred_at < ?
-                """, arguments: [startS, endS]) ?? 0
+                """, arguments: [start, end]) ?? 0
             
             let expense: Double = try Double.fetchOne(db, sql: """
                 SELECT COALESCE(SUM(amount), 0) 
                 FROM finance_transaction 
                 WHERE direction = 'expense' AND occurred_at >= ? AND occurred_at < ?
-                """, arguments: [startS, endS]) ?? 0
+                """, arguments: [start, end]) ?? 0
             
             return (income, expense)
         }
