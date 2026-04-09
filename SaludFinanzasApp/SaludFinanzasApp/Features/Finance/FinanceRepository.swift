@@ -94,7 +94,7 @@ final class FinanceRepository {
         
         let tx = FinanceTransaction(
             id: UUID().uuidString,
-            occurredAt: nowISO(),
+            occurredAt: now,
             amount: amount,
             currency: "MXN",
             direction: direction,
@@ -104,7 +104,7 @@ final class FinanceRepository {
             source: "manual",
             externalId: nil,
             metadata: nil,
-            createdAt: nowISO()
+            createdAt: now
         )
         
         try dbQueue.write {
