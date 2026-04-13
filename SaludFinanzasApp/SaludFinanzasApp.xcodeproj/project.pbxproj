@@ -7,26 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0909770E2F44EF270063D59F /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909770B2F44EF270063D59F /* AppDatabase.swift */; };
+		0919064D2F8D71B0005F756A /* String+DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906332F8D71B0005F756A /* String+DateFormat.swift */; };
+		0919064E2F8D71B0005F756A /* AddLabResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906422F8D71B0005F756A /* AddLabResultView.swift */; };
+		0919064F2F8D71B0005F756A /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906382F8D71B0005F756A /* AccountsView.swift */; };
+		091906502F8D71B0005F756A /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919063B2F8D71B0005F756A /* AddTransactionView.swift */; };
+		091906512F8D71B0005F756A /* FinanceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919063E2F8D71B0005F756A /* FinanceSettingsView.swift */; };
+		091906522F8D71B0005F756A /* Date+Finance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906312F8D71B0005F756A /* Date+Finance.swift */; };
+		091906532F8D71B0005F756A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919064A2F8D71B0005F756A /* ContentView.swift */; };
+		091906542F8D71B0005F756A /* SaludFinanzasAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919064B2F8D71B0005F756A /* SaludFinanzasAppApp.swift */; };
+		091906552F8D71B0005F756A /* AccountBalanceSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906352F8D71B0005F756A /* AccountBalanceSummary.swift */; };
+		091906562F8D71B0005F756A /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919063A2F8D71B0005F756A /* AddCategoryView.swift */; };
+		091906572F8D71B0005F756A /* AddAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906392F8D71B0005F756A /* AddAccountView.swift */; };
+		091906582F8D71B0005F756A /* FinanceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919063D2F8D71B0005F756A /* FinanceRepository.swift */; };
+		091906592F8D71B0005F756A /* HealthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906432F8D71B0005F756A /* HealthRepository.swift */; };
+		0919065A2F8D71B0005F756A /* FinanceHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906462F8D71B0005F756A /* FinanceHomeView.swift */; };
+		0919065B2F8D71B0005F756A /* FinanceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906362F8D71B0005F756A /* FinanceModels.swift */; };
+		0919065C2F8D71B0005F756A /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0919063C2F8D71B0005F756A /* CategoriesView.swift */; };
+		0919065D2F8D71B0005F756A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906452F8D71B0005F756A /* DashboardView.swift */; };
+		0919065E2F8D71B0005F756A /* HealthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906402F8D71B0005F756A /* HealthModels.swift */; };
+		0919065F2F8D71B0005F756A /* HealthHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906472F8D71B0005F756A /* HealthHomeView.swift */; };
+		091906602F8D71B0005F756A /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091906322F8D71B0005F756A /* Double+Currency.swift */; };
+		091906612F8D71B0005F756A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 091906492F8D71B0005F756A /* Assets.xcassets */; };
+		094992602F8D7360003EB862 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949925E2F8D7360003EB862 /* DateFormatters.swift */; };
+		094992612F8D7360003EB862 /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949925B2F8D7360003EB862 /* AppDatabase.swift */; };
+		094992622F8D7360003EB862 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949925D2F8D7360003EB862 /* AppEnvironment.swift */; };
 		09AD0A772F450CC3001B496E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 09AD0A762F450CC3001B496E /* GRDB */; };
-		09AD0A862F451370001B496E /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AD0A852F45136B001B496E /* AppEnvironment.swift */; };
-		09AD0A982F47A621001B496E /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AD0A972F47A61E001B496E /* DateFormatters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0909770B2F44EF270063D59F /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
+		091906312F8D71B0005F756A /* Date+Finance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Finance.swift"; sourceTree = "<group>"; };
+		091906322F8D71B0005F756A /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
+		091906332F8D71B0005F756A /* String+DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormat.swift"; sourceTree = "<group>"; };
+		091906352F8D71B0005F756A /* AccountBalanceSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceSummary.swift; sourceTree = "<group>"; };
+		091906362F8D71B0005F756A /* FinanceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceModels.swift; sourceTree = "<group>"; };
+		091906382F8D71B0005F756A /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
+		091906392F8D71B0005F756A /* AddAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountView.swift; sourceTree = "<group>"; };
+		0919063A2F8D71B0005F756A /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		0919063B2F8D71B0005F756A /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		0919063C2F8D71B0005F756A /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		0919063D2F8D71B0005F756A /* FinanceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceRepository.swift; sourceTree = "<group>"; };
+		0919063E2F8D71B0005F756A /* FinanceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSettingsView.swift; sourceTree = "<group>"; };
+		091906402F8D71B0005F756A /* HealthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthModels.swift; sourceTree = "<group>"; };
+		091906422F8D71B0005F756A /* AddLabResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabResultView.swift; sourceTree = "<group>"; };
+		091906432F8D71B0005F756A /* HealthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRepository.swift; sourceTree = "<group>"; };
+		091906452F8D71B0005F756A /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		091906462F8D71B0005F756A /* FinanceHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceHomeView.swift; sourceTree = "<group>"; };
+		091906472F8D71B0005F756A /* HealthHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHomeView.swift; sourceTree = "<group>"; };
+		091906492F8D71B0005F756A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0919064A2F8D71B0005F756A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0919064B2F8D71B0005F756A /* SaludFinanzasAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaludFinanzasAppApp.swift; sourceTree = "<group>"; };
+		0949925B2F8D7360003EB862 /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
+		0949925D2F8D7360003EB862 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		0949925E2F8D7360003EB862 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		097FFD4A2F44E8D500FA6734 /* SaludFinanzasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaludFinanzasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		09AD0A852F45136B001B496E /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		09AD0A972F47A61E001B496E /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		097FFD4C2F44E8D500FA6734 /* SaludFinanzasApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SaludFinanzasApp;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		097FFD472F44E8D500FA6734 /* Frameworks */ = {
@@ -40,20 +74,97 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0909770C2F44EF270063D59F /* Database */ = {
+		091906342F8D71B0005F756A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0909770B2F44EF270063D59F /* AppDatabase.swift */,
+				091906312F8D71B0005F756A /* Date+Finance.swift */,
+				091906322F8D71B0005F756A /* Double+Currency.swift */,
+				091906332F8D71B0005F756A /* String+DateFormat.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		091906372F8D71B0005F756A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				091906352F8D71B0005F756A /* AccountBalanceSummary.swift */,
+				091906362F8D71B0005F756A /* FinanceModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0919063F2F8D71B0005F756A /* Finance */ = {
+			isa = PBXGroup;
+			children = (
+				091906372F8D71B0005F756A /* Models */,
+				091906382F8D71B0005F756A /* AccountsView.swift */,
+				091906392F8D71B0005F756A /* AddAccountView.swift */,
+				0919063A2F8D71B0005F756A /* AddCategoryView.swift */,
+				0919063B2F8D71B0005F756A /* AddTransactionView.swift */,
+				0919063C2F8D71B0005F756A /* CategoriesView.swift */,
+				0919063D2F8D71B0005F756A /* FinanceRepository.swift */,
+				0919063E2F8D71B0005F756A /* FinanceSettingsView.swift */,
+			);
+			path = Finance;
+			sourceTree = "<group>";
+		};
+		091906412F8D71B0005F756A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				091906402F8D71B0005F756A /* HealthModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		091906442F8D71B0005F756A /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				091906412F8D71B0005F756A /* Models */,
+				091906422F8D71B0005F756A /* AddLabResultView.swift */,
+				091906432F8D71B0005F756A /* HealthRepository.swift */,
+			);
+			path = Health;
+			sourceTree = "<group>";
+		};
+		091906482F8D71B0005F756A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				0919063F2F8D71B0005F756A /* Finance */,
+				091906442F8D71B0005F756A /* Health */,
+				091906452F8D71B0005F756A /* DashboardView.swift */,
+				091906462F8D71B0005F756A /* FinanceHomeView.swift */,
+				091906472F8D71B0005F756A /* HealthHomeView.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		0919064C2F8D71B0005F756A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0949925F2F8D7360003EB862 /* Infrastructure */,
+				091906342F8D71B0005F756A /* Extensions */,
+				091906482F8D71B0005F756A /* Features */,
+				091906492F8D71B0005F756A /* Assets.xcassets */,
+				0919064A2F8D71B0005F756A /* ContentView.swift */,
+				0919064B2F8D71B0005F756A /* SaludFinanzasAppApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		0949925C2F8D7360003EB862 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				0949925B2F8D7360003EB862 /* AppDatabase.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
 		};
-		0909770D2F44EF270063D59F /* Infrastructure */ = {
+		0949925F2F8D7360003EB862 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				09AD0A972F47A61E001B496E /* DateFormatters.swift */,
-				09AD0A852F45136B001B496E /* AppEnvironment.swift */,
-				0909770C2F44EF270063D59F /* Database */,
+				0949925C2F8D7360003EB862 /* Database */,
+				0949925D2F8D7360003EB862 /* AppEnvironment.swift */,
+				0949925E2F8D7360003EB862 /* DateFormatters.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -61,8 +172,7 @@
 		097FFD412F44E8D500FA6734 = {
 			isa = PBXGroup;
 			children = (
-				0909770D2F44EF270063D59F /* Infrastructure */,
-				097FFD4C2F44E8D500FA6734 /* SaludFinanzasApp */,
+				0919064C2F8D71B0005F756A /* App */,
 				097FFD4B2F44E8D500FA6734 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,9 +199,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				097FFD4C2F44E8D500FA6734 /* SaludFinanzasApp */,
 			);
 			name = SaludFinanzasApp;
 			packageProductDependencies = (
@@ -143,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				091906612F8D71B0005F756A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,9 +261,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09AD0A862F451370001B496E /* AppEnvironment.swift in Sources */,
-				0909770E2F44EF270063D59F /* AppDatabase.swift in Sources */,
-				09AD0A982F47A621001B496E /* DateFormatters.swift in Sources */,
+				0919064D2F8D71B0005F756A /* String+DateFormat.swift in Sources */,
+				0919064E2F8D71B0005F756A /* AddLabResultView.swift in Sources */,
+				0919064F2F8D71B0005F756A /* AccountsView.swift in Sources */,
+				091906502F8D71B0005F756A /* AddTransactionView.swift in Sources */,
+				091906512F8D71B0005F756A /* FinanceSettingsView.swift in Sources */,
+				091906522F8D71B0005F756A /* Date+Finance.swift in Sources */,
+				091906532F8D71B0005F756A /* ContentView.swift in Sources */,
+				091906542F8D71B0005F756A /* SaludFinanzasAppApp.swift in Sources */,
+				091906552F8D71B0005F756A /* AccountBalanceSummary.swift in Sources */,
+				091906562F8D71B0005F756A /* AddCategoryView.swift in Sources */,
+				091906572F8D71B0005F756A /* AddAccountView.swift in Sources */,
+				091906582F8D71B0005F756A /* FinanceRepository.swift in Sources */,
+				091906592F8D71B0005F756A /* HealthRepository.swift in Sources */,
+				0919065A2F8D71B0005F756A /* FinanceHomeView.swift in Sources */,
+				0919065B2F8D71B0005F756A /* FinanceModels.swift in Sources */,
+				0919065C2F8D71B0005F756A /* CategoriesView.swift in Sources */,
+				0919065D2F8D71B0005F756A /* DashboardView.swift in Sources */,
+				0919065E2F8D71B0005F756A /* HealthModels.swift in Sources */,
+				094992602F8D7360003EB862 /* DateFormatters.swift in Sources */,
+				094992612F8D7360003EB862 /* AppDatabase.swift in Sources */,
+				094992622F8D7360003EB862 /* AppEnvironment.swift in Sources */,
+				0919065F2F8D71B0005F756A /* HealthHomeView.swift in Sources */,
+				091906602F8D71B0005F756A /* Double+Currency.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

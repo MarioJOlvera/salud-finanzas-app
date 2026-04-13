@@ -28,6 +28,7 @@ final class AppDatabase {
     
     private var migrator: DatabaseMigrator{
         var migrator = DatabaseMigrator()
+        
         migrator.eraseDatabaseOnSchemaChange = true
         
         migrator.registerMigration("v1") {
@@ -235,6 +236,28 @@ final class AppDatabase {
                         ON finance_transaction(occurred_at);
                     """
             )
+        }
+        
+        migrator.registerMigration("v2") {
+            db in try db.execute(sql:"""
+                UPDATE biomarker
+                SET name = CASE 
+                    WHEN name = 'Colesterok HDL' THEN 'Colesterol HDL'
+                    WHEN name = 'Triglicéridocs' THEN 'Triglicéridos' 
+                    ELSE name
+                END
+                """)
+        }
+        
+        migrator.registerMigration("v3") {
+            db in try db.execute(sql: """
+                UPDATE biomarker
+                SET name = CASE 
+                    WHEN name = 'Colesterok HDL' THEN 'Colesterol HDL' 
+                    WHEN name = 'Triglicéridocs' THEN 'Triglicéridos' 
+                    ELSE name 
+                END
+                """)
         }
         
         return migrator
