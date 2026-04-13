@@ -47,4 +47,43 @@ struct LabResult: Codable, FetchableRecord, PersistableRecord, Identifiable {
     }
 }
 
+struct Professional: Codable, FetchableRecord, PersistableRecord, Identifiable {
+    static let databaseTableName = "professional"
+    
+    var id: String
+    var name: String
+    var specialty: String
+    var phone: String?
+    var email: String?
+    var createdAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, specialty, phone, email
+        case createdAt = "created_at"
+    }
+}
+
+struct Appointment: Codable, FetchableRecord, PersistableRecord, Identifiable {
+    static let databaseTableName = "appointment"
+    
+    var id: String
+    var professionalId: String
+    var scheduledAt: String
+    var location: String?
+    var note: String?
+    var status: String
+    var reminderEnabled: Bool
+    var metadata: String?
+    var createdAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case professionalId = "professional_id"
+        case scheduledAt = "scheduled_at"
+        case location, note, status
+        case reminderEnabled = "reminder_enabled"
+        case metadata
+        case createdAt = "created_at"
+    }
+}
 

@@ -86,6 +86,38 @@ final class HealthRepository {
             db in try result.insert(db)
         }
     }
+    
+    func fetchProfessionals() throws -> [Professional] {
+        try dbQueue.read {
+            db in try Professional
+                .order(Column("name").asc)
+                .fetchAll(db)
+        }
+    }
+    
+    func addProfessional(
+        name: String,
+        specialty: String,
+        phone: String?,
+        email: String?
+    ) throws {
+        let now = Date().toISO8601UTCString()
+        
+        let professional = Professional(
+            id: UUID().uuidString,
+            name: name,
+            specialty: specialty,
+            phone: phone?.isEmpty == true ? nil : phone,
+            email: email?.isEmpty == true ? nil : email,
+            createdAt: now
+        )
+        
+        try dbQueue.write {
+            db in try professional.insert(db)
+        }
+    }
+    
+    
 }
 
 
