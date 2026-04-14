@@ -31,7 +31,13 @@
 		094992602F8D7360003EB862 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949925E2F8D7360003EB862 /* DateFormatters.swift */; };
 		094992612F8D7360003EB862 /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949925B2F8D7360003EB862 /* AppDatabase.swift */; };
 		094992622F8D7360003EB862 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949925D2F8D7360003EB862 /* AppEnvironment.swift */; };
+		095C09E42F8D87C3007512F5 /* HealthSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C09E32F8D87BD007512F5 /* HealthSettingView.swift */; };
+		095C09E62F8D8853007512F5 /* ProfessionalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C09E52F8D884D007512F5 /* ProfessionalsView.swift */; };
+		095C09E82F8DB126007512F5 /* AddProfessionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C09E72F8DB120007512F5 /* AddProfessionalView.swift */; };
+		095C09EA2F8DB396007512F5 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C09E92F8DB390007512F5 /* AppointmentsView.swift */; };
+		095C09EC2F8DBA2B007512F5 /* AddAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C09EB2F8DBA23007512F5 /* AddAppointmentView.swift */; };
 		09AD0A772F450CC3001B496E /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 09AD0A762F450CC3001B496E /* GRDB */; };
+		09BC85452F8D7A760099492B /* HealthSummaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC85442F8D7A760099492B /* HealthSummaryModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +65,13 @@
 		0949925B2F8D7360003EB862 /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
 		0949925D2F8D7360003EB862 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		0949925E2F8D7360003EB862 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
+		095C09E32F8D87BD007512F5 /* HealthSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSettingView.swift; sourceTree = "<group>"; };
+		095C09E52F8D884D007512F5 /* ProfessionalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalsView.swift; sourceTree = "<group>"; };
+		095C09E72F8DB120007512F5 /* AddProfessionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfessionalView.swift; sourceTree = "<group>"; };
+		095C09E92F8DB390007512F5 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		095C09EB2F8DBA23007512F5 /* AddAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAppointmentView.swift; sourceTree = "<group>"; };
 		097FFD4A2F44E8D500FA6734 /* SaludFinanzasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaludFinanzasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09BC85442F8D7A760099492B /* HealthSummaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSummaryModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +123,7 @@
 		091906412F8D71B0005F756A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				09BC85442F8D7A760099492B /* HealthSummaryModels.swift */,
 				091906402F8D71B0005F756A /* HealthModels.swift */,
 			);
 			path = Models;
@@ -119,6 +132,11 @@
 		091906442F8D71B0005F756A /* Health */ = {
 			isa = PBXGroup;
 			children = (
+				095C09EB2F8DBA23007512F5 /* AddAppointmentView.swift */,
+				095C09E92F8DB390007512F5 /* AppointmentsView.swift */,
+				095C09E72F8DB120007512F5 /* AddProfessionalView.swift */,
+				095C09E52F8D884D007512F5 /* ProfessionalsView.swift */,
+				095C09E32F8D87BD007512F5 /* HealthSettingView.swift */,
 				091906412F8D71B0005F756A /* Models */,
 				091906422F8D71B0005F756A /* AddLabResultView.swift */,
 				091906432F8D71B0005F756A /* HealthRepository.swift */,
@@ -263,6 +281,8 @@
 			files = (
 				0919064D2F8D71B0005F756A /* String+DateFormat.swift in Sources */,
 				0919064E2F8D71B0005F756A /* AddLabResultView.swift in Sources */,
+				095C09E42F8D87C3007512F5 /* HealthSettingView.swift in Sources */,
+				095C09E62F8D8853007512F5 /* ProfessionalsView.swift in Sources */,
 				0919064F2F8D71B0005F756A /* AccountsView.swift in Sources */,
 				091906502F8D71B0005F756A /* AddTransactionView.swift in Sources */,
 				091906512F8D71B0005F756A /* FinanceSettingsView.swift in Sources */,
@@ -273,6 +293,8 @@
 				091906562F8D71B0005F756A /* AddCategoryView.swift in Sources */,
 				091906572F8D71B0005F756A /* AddAccountView.swift in Sources */,
 				091906582F8D71B0005F756A /* FinanceRepository.swift in Sources */,
+				095C09EA2F8DB396007512F5 /* AppointmentsView.swift in Sources */,
+				09BC85452F8D7A760099492B /* HealthSummaryModels.swift in Sources */,
 				091906592F8D71B0005F756A /* HealthRepository.swift in Sources */,
 				0919065A2F8D71B0005F756A /* FinanceHomeView.swift in Sources */,
 				0919065B2F8D71B0005F756A /* FinanceModels.swift in Sources */,
@@ -280,8 +302,10 @@
 				0919065D2F8D71B0005F756A /* DashboardView.swift in Sources */,
 				0919065E2F8D71B0005F756A /* HealthModels.swift in Sources */,
 				094992602F8D7360003EB862 /* DateFormatters.swift in Sources */,
+				095C09EC2F8DBA2B007512F5 /* AddAppointmentView.swift in Sources */,
 				094992612F8D7360003EB862 /* AppDatabase.swift in Sources */,
 				094992622F8D7360003EB862 /* AppEnvironment.swift in Sources */,
+				095C09E82F8DB126007512F5 /* AddProfessionalView.swift in Sources */,
 				0919065F2F8D71B0005F756A /* HealthHomeView.swift in Sources */,
 				091906602F8D71B0005F756A /* Double+Currency.swift in Sources */,
 			);

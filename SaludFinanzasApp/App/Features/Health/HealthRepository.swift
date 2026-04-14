@@ -117,6 +117,129 @@ final class HealthRepository {
         }
     }
     
+    func deleteProfessional(id: String) throws {
+        try dbQueue.write {
+            db in _ = try Professional.deleteOne(db, key: id)
+        }
+    }
+    
+    func fetchAppointments() throws -> [Appointment] {
+        try dbQueue.read {
+            db in try Appointment.order(sql: "scheduled_at ASC").fetchAll(db)
+        }
+    }
+    
+    func addAppointment(
+        professionalId: String,
+        scheduledAt: String,
+        location: String?,
+        note: String?,
+        status: String = "scheduled",
+        reminderEnabled: Bool = true
+    ) throws {
+        let now = Date().toISO8601UTCString()
+        
+        let appointment = Appointment(
+            id: UUID().uuidString,
+            professionalId: professionalId,
+            scheduledAt: scheduledAt,
+            location: location?.isEmpty == true ? nil : location,
+            note: note?.isEmpty == true ? nil : note,
+            status: status,
+            reminderEnabled: reminderEnabled,
+            metadata: nil,
+            createdAt: now
+        )
+        
+        try dbQueue.write {
+            db in try appointment.insert(db)
+        }
+    }
+    
+    func deleteAppointment(id: String) throws {
+        try dbQueue.write {
+            db in _ = try Appointment.deleteOne(db, key: id)
+        }
+    }
+    
+    func fetchHealthSummary() throws -> HealthSummary {
+        try dbQueue.read {
+            db in
+            let biomarkerCount = try Biomarker.fetchCount(db)
+            let labResultCount = try LabResult.fetchCount(db)
+            let appointmentCount = try Appointment.fetchCount(db)
+            
+            
+            return HealthSummary(
+                biomarkerCount: biomarkerCount,
+                labResultCount: labResultCount,
+                appointmentCount: appointmentCount
+            )
+        }
+    }
+    
+    func fetchRecentLabResultSummaries(limit: Int = 5) throws -> [RecentLabResultSummary] {
+        try dbQueue.read {
+            db in
+            let rows = try Row.fetchAll(db, sql: """
+                SELECT 
+                    lr.id, 
+                    b.name AS biomarker_name, 
+                    lr.value,
+                    lr.unit, 
+                    lr.tested_at
+                FROM lab_result lr 
+                INNER JOIN biomarker b ON lr.biomarker_id = b.id 
+                ORDER BY lr.tested_at DESC 
+                LIMIT ?
+                """, arguments: [limit])
+            
+            return rows.map {
+                row in
+                RecentLabResultSummary(
+                    id: row["id"],
+                    biomarkerName: row["biomarker_name"],
+                    value: row["value"],
+                    unit: row["unit"],
+                    testedAt: row["tested_at"]
+                )
+            }
+        }
+    }
+    
+    func fetchUpcomingAppointmentSummaries(limit: Int = 5) throws -> [UpcomingAppointmentSummary] {
+        let now = Date().toISO8601UTCString()
+        
+        return try dbQueue.read {
+            db in
+            let rows = try Row.fetchAll(db, sql: """
+                SELECT 
+                    a.id, 
+                    p.name AS professional_name, 
+                    p.specialty, 
+                    a.scheduled_at, 
+                    a.location, 
+                    a.status
+                FROM appointment a 
+                INNER JOIN professional p ON a.professional_id = p.id 
+                WHERE a.scheduled_at >= ? 
+                ORDER BY a.scheduled_at ASC
+                LIMIT ?
+                """, arguments: [now, limit])
+            
+            return rows.map {
+                row in UpcomingAppointmentSummary(
+                    id: row["id"],
+                    professionalName: row["professional_name"],
+                    specialty: row["specialty"],
+                    scheduledAt: row["scheduled_at"],
+                    location: row["location"],
+                    status: row["status"]
+                )
+            }
+        }
+    }
+    
     
 }
 
