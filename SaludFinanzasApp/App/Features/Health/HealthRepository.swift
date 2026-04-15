@@ -185,23 +185,26 @@ final class HealthRepository {
                 SELECT 
                     lr.id, 
                     b.name AS biomarker_name, 
-                    lr.value,
+                    lr.value, 
                     lr.unit, 
-                    lr.tested_at
+                    lr.tested_at, 
+                    lr.reference_min, 
+                    lr.reference_max
                 FROM lab_result lr 
-                INNER JOIN biomarker b ON lr.biomarker_id = b.id 
-                ORDER BY lr.tested_at DESC 
-                LIMIT ?
+                INNER JOIN biomarker b ON lr.biomarker_id = b.id
+                ORDER BY lr.tested_at DESC
+                LIMIT ? 
                 """, arguments: [limit])
             
             return rows.map {
-                row in
-                RecentLabResultSummary(
+                row in RecentLabResultSummary(
                     id: row["id"],
                     biomarkerName: row["biomarker_name"],
                     value: row["value"],
                     unit: row["unit"],
-                    testedAt: row["tested_at"]
+                    testedAt: row["tested_at"],
+                    referenceMin: row["reference_min"],
+                    referenceMax: row["reference_max"]
                 )
             }
         }

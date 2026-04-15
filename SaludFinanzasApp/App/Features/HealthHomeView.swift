@@ -41,7 +41,8 @@ struct HealthHomeView: View {
                                     .foregroundStyle(.secondary)
                                 
                                 Text("\(summary.biomarkerCount)")
-                                    .font(.headline)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
                             }
                             
                             Spacer()
@@ -52,7 +53,8 @@ struct HealthHomeView: View {
                                     .foregroundStyle(.secondary)
                                 
                                 Text("\(summary.labResultCount)")
-                                    .font(.headline)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
                             }
                             
                             Spacer()
@@ -63,7 +65,8 @@ struct HealthHomeView: View {
                                     .foregroundStyle(.secondary)
                                 
                                 Text("\(summary.appointmentCount)")
-                                    .font(.headline)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
                             }
                         }
                     }
@@ -83,7 +86,7 @@ struct HealthHomeView: View {
                     } else {
                         ForEach(recentResults) {
                             result in
-                            HStack(alignment: .top) {
+                            HStack(alignment: .top, spacing: 12) {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(result.biomarkerName)
                                         .font(.headline)
@@ -98,8 +101,26 @@ struct HealthHomeView: View {
                                 
                                 Spacer()
                                 
+                                Text(result.statusLabel)
+                                    .font(.caption)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                                    .background(
+                                        result.statusColorName == "green"
+                                        ? Color.green.opacity(0.15)
+                                        : result.statusColorName == "red"
+                                        ? Color.red.opacity(0.15)
+                                        : Color.gray.opacity(0.15)
+                                    )
+                                    .foregroundStyle(
+                                        result.statusColorName == "green"
+                                        ? Color.green
+                                        : result.statusColorName == "red"
+                                        ? Color.red
+                                        : Color.secondary
+                                    )
+                                    .clipShape(Capsule())
                             }
-                            
                             .padding(.vertical, 4)
                         }
                     }
@@ -107,29 +128,40 @@ struct HealthHomeView: View {
                 
                 Section("Próximas citas") {
                     if upcomingAppointments.isEmpty {
-                        Text("No hay citas próximas")
+                        Text("No hay próximas citas.")
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(upcomingAppointments) {
                             appointment in
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(appointment.professionalName)
-                                    .font(.headline)
-                                
-                                Text(appointment.specialty)
-                                    .foregroundStyle(.secondary)
-                                
-                                Text(appointment.scheduledAt.formattedShorDate())
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                
-                                if let location = appointment.location, !location.isEmpty {
-                                    Text(location)
+                            HStack(alignment: .top, spacing: 12) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(appointment.professionalName)
+                                        .font(.headline)
+                                    
+                                    Text(appointment.specialty)
+                                        .foregroundStyle(.secondary)
+                                    
+                                    Text(appointment.scheduledAt.formattedShorDate())
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
+                                    
+                                    if let location = appointment.location, !location.isEmpty {
+                                        Text(location)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
                                 }
+                                
+                                Spacer()
+                                
+                                Text(appointment.status.capitalized)
+                                    .font(.caption)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                                    .background(Color.blue.opacity(0.15))
+                                    .foregroundStyle(.blue)
+                                    .clipShape(Capsule())
                             }
-                            .padding(.vertical, 4)
                         }
                     }
                 }
